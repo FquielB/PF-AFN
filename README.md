@@ -1,5 +1,8 @@
 ## Adding windows compatibily
+To process correctly on windows is needed to wrap the whole process with --> if __name__ = '__main__':  
+
 ## Transforming it to a method to be called with other system
+Starting method tryon_process on tryon_process.py, tested on start_test.py
 
 # Parser-Free Virtual Try-on via Distilling Appearance Flows, CVPR 2021
 Official code for CVPR 2021 paper 'Parser-Free Virtual Try-on via Distilling Appearance Flows'
