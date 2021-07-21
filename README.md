@@ -1,5 +1,5 @@
 ## Adding windows compatibily
-To process correctly on windows is needed to wrap the whole process with --> if __name__ = '__main__':  
+To process correctly on windows is needed to wrap the whole process with --> if \__name__ = '\__main__':  
 
 ## Transforming it to a method to be called with other system
 Starting method tryon_process on tryon_process.py, tested on start_test.py
