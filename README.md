@@ -1,3 +1,6 @@
+## Adding windows compatibily
+## Transforming it to a method to be called with other system
+
 # Parser-Free Virtual Try-on via Distilling Appearance Flows, CVPR 2021
 Official code for CVPR 2021 paper 'Parser-Free Virtual Try-on via Distilling Appearance Flows'
 
