@@ -18,7 +18,8 @@ def tryon_process(cloth_image_str, person_image_str):
             shuffle = False,
             num_workers=int(1))
     gen_model, warp_model = init_model() 
-    model_process(gen_model, warp_model, torch_images.dataset)
+    tryon_image_b64 = model_process(gen_model, warp_model, torch_images.dataset)
+    return tryon_image_b64
 
 
 def init_model():
@@ -67,4 +68,4 @@ def model_process(gen_model, warp_model, data):
         bgr=cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR)
         revtal, buffer = cv2.imencode('.jpg', bgr)
         text = base64.b64encode(buffer)
-        print(text)
+        return text

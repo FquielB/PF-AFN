@@ -9,7 +9,10 @@ def image_preparation(cloth_image_str, person_image_str):
     edge_cloth_image = generate_edge_image(cloth_image_str)
     cloth_image = str_to_image(cloth_image_str)
     person_image = str_to_image(person_image_str)
-    images_dict = data_preparation(cloth_image, edge_cloth_image, person_image)
+    scaled_cloth_image = scale_image_for_model(cloth_image)
+    scaled_person_image = scale_image_for_model(person_image)
+    scaled_edge_image = scale_image_for_model(edge_cloth_image)
+    images_dict = data_preparation(scaled_cloth_image, scaled_edge_image, scaled_person_image)
     return images_dict
 
 
@@ -21,8 +24,6 @@ def generate_edge_image(image_str):
     
     # Convert RGB to BGR 
     open_cv_image = open_cv_image[:, :, ::-1].copy() 
-    
-    OLD_IMG = open_cv_image.copy()
     
     mask = np.zeros(open_cv_image.shape[:2], np.uint8)
     
@@ -48,7 +49,7 @@ def str_to_image(image_str):
 
 
 def data_preparation(cloth_image: Image, edge_cloth_image: Image, person_image: Image): 
-    
+
     transform = get_transform()
     transform_E = get_transform(method=Image.NEAREST, normalize=False)
 
@@ -67,6 +68,7 @@ def data_preparation(cloth_image: Image, edge_cloth_image: Image, person_image: 
 
 
 def get_transform(method=Image.BICUBIC, normalize=True):
+
     transform_list = []
     transform_list += [transforms.ToTensor()]
 
@@ -74,3 +76,6 @@ def get_transform(method=Image.BICUBIC, normalize=True):
         transform_list += [transforms.Normalize((0.5, 0.5, 0.5),
                                                 (0.5, 0.5, 0.5))]
     return transforms.Compose(transform_list)
+
+def scale_image_for_model(image: Image):
+    return image.resize((192, 256))
